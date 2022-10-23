@@ -14,24 +14,26 @@ export function App() {
   const positive = total ? Math.round((good / total) * 100) : 0;
   const stats = [good, neutral, bad, total, positive];
 
-  const goodStateSet = () => {
-    setGood(prevState => prevState + 1);
-  };
-  const neutralStateSet = () => {
-    setNeutral(prevState => prevState + 1);
-  };
-  const badStateSet = () => {
-    setBad(prevState => prevState + 1);
+  const changeState = evt => {
+    switch (evt.target.name) {
+      case 'good':
+        setGood(prevState => prevState + 1);
+        break;
+      case 'neutral':
+        setNeutral(prevState => prevState + 1);
+        break;
+      case 'bad':
+        setBad(prevState => prevState + 1);
+        break;
+      default:
+        return;
+    }
   };
 
   return (
     <FeedbackForm>
       <Section title="Please leave feedback">
-        <FeedbackOptions
-          goodFeedback={goodStateSet}
-          neutralFeedback={neutralStateSet}
-          badFeedback={badStateSet}
-        ></FeedbackOptions>
+        <FeedbackOptions onLeaveFeedback={changeState}></FeedbackOptions>
       </Section>
 
       <Section title="Statistics">

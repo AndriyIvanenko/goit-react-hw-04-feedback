@@ -1,20 +1,16 @@
 import PropTypes from 'prop-types';
 import { FeedbackControls, FeedbackButton } from './FeedbackOptions.styled';
 
-export const FeedbackOptions = ({
-  goodFeedback,
-  neutralFeedback,
-  badFeedback,
-}) => {
+export const FeedbackOptions = ({ onLeaveFeedback }) => {
   return (
     <FeedbackControls>
-      <FeedbackButton type="button" onClick={goodFeedback}>
+      <FeedbackButton type="button" name="good" onClick={onLeaveFeedback}>
         Good
       </FeedbackButton>
-      <FeedbackButton type="button" onClick={neutralFeedback}>
+      <FeedbackButton type="button" name="neutral" onClick={onLeaveFeedback}>
         Neutral
       </FeedbackButton>
-      <FeedbackButton type="button" onClick={badFeedback}>
+      <FeedbackButton type="button" name="bad" onClick={onLeaveFeedback}>
         Bad
       </FeedbackButton>
     </FeedbackControls>
@@ -22,7 +18,5 @@ export const FeedbackOptions = ({
 };
 
 FeedbackOptions.propTypes = {
-  goodFeedback: PropTypes.func,
-  neutralFeedback: PropTypes.func,
-  badFeedback: PropTypes.func,
+  onLeaveFeedback: PropTypes.func,
 };
