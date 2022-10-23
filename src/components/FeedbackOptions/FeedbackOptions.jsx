@@ -1,25 +1,28 @@
 import PropTypes from 'prop-types';
 import { FeedbackControls, FeedbackButton } from './FeedbackOptions.styled';
 
-export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+export const FeedbackOptions = ({
+  goodFeedback,
+  neutralFeedback,
+  badFeedback,
+}) => {
   return (
     <FeedbackControls>
-      {options.map((option, index) => (
-        <FeedbackButton
-          type="button"
-          name={option}
-          key={index}
-          onClick={onLeaveFeedback}
-        >
-          {option.charAt(0).toUpperCase() + option.slice(1)}
-        </FeedbackButton>
-      ))}
+      <FeedbackButton type="button" onClick={goodFeedback}>
+        Good
+      </FeedbackButton>
+      <FeedbackButton type="button" onClick={neutralFeedback}>
+        Neutral
+      </FeedbackButton>
+      <FeedbackButton type="button" onClick={badFeedback}>
+        Bad
+      </FeedbackButton>
     </FeedbackControls>
   );
 };
 
 FeedbackOptions.propTypes = {
-  onGoodClick: PropTypes.func,
-  onNeutralClick: PropTypes.func,
-  onBadClick: PropTypes.func,
+  goodFeedback: PropTypes.func,
+  neutralFeedback: PropTypes.func,
+  badFeedback: PropTypes.func,
 };

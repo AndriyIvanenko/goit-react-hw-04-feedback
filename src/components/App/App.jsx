@@ -11,29 +11,26 @@ export const Feedback = () => {
   const [bad, setBad] = useState(0);
 
   const total = good + neutral + bad;
-  const positive = total ? (good / total) * 100 : 0;
+  const positive = total ? Math.round((good / total) * 100) : 0;
+  const stats = [good, neutral, bad, total, positive];
 
-  const onFeedbackClick = evt => {
-    switch (evt.target.name) {
-      case 'good':
-        setGood(prevState => prevState + 1);
-        break;
-      case 'neutral':
-        setNeutral(prevState => prevState + 1);
-        break;
-      case 'bad':
-        setBad(prevState => prevState + 1);
-        break;
-      default:
-    }
+  const goodStateSet = () => {
+    setGood(prevState => prevState + 1);
+  };
+  const neutralStateSet = () => {
+    setNeutral(prevState => prevState + 1);
+  };
+  const badStateSet = () => {
+    setBad(prevState => prevState + 1);
   };
 
   return (
     <FeedbackForm>
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
-          onLeaveFeedback={onFeedbackClick}
+          goodFeedback={goodStateSet}
+          neutralFeedback={neutralStateSet}
+          badFeedback={badStateSet}
         ></FeedbackOptions>
       </Section>
 
@@ -41,13 +38,7 @@ export const Feedback = () => {
         {total === 0 ? (
           <Notification message="There is no feedback"></Notification>
         ) : (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={total}
-            positivePercentage={Math.round(positive)}
-          ></Statistics>
+          <Statistics statistics={stats}></Statistics>
         )}
       </Section>
     </FeedbackForm>
